@@ -1,1 +1,50 @@
-<p>home works!</p>
+<div
+    class="d-flex justify-content-between my-3"
+    style="margin-left: -0.25rem; margin-right: -0.25rem"
+>
+    <span>
+        <button
+            type="button"
+            class="btn btn-success m-1"
+            (click)="onExportJson()"
+        >
+            Export JSON
+        </button>
+        <button
+            type="button"
+            class="btn btn-secondary m-1"
+            (click)="fileUpload.click()"
+        >
+            Import JSON
+        </button>
+    </span>
+    <span>
+        <button
+            type="button"
+            class="btn btn-success m-1"
+            (click)="onExportCsv()"
+        >
+            Export CSV
+        </button>
+    </span>
+</div>
+
+<app-table
+    [data]="data$ | async"
+    [page]="paginator.page"
+    [rowsPerPage]="paginator.rowsPerPage"
+    [rowsPerPageOptions]="paginator.rowsPerPageOptions"
+    [total]="paginator.total"
+    [loading]="loading"
+    (pageChange)="onPageChange($event)"
+    (statusChange)="onStatusChange($event)"
+></app-table>
+
+<input
+    #fileUpload
+    type="file"
+    id="importCSV"
+    class="d-none"
+    accept=".json"
+    (change)="onImportJSON($event)"
+/>
